@@ -89,7 +89,10 @@ $order = ! empty( $order ) ? $order : wc_get_order( absint( get_query_var( 'orde
         <?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
         <?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
 
-        <?php wc_get_template( 'order/order-details.php', [ 'order_id' => $order->get_id() ] ); ?>
+        <?php wc_get_template( 'order/order-details.php', [
+            'order_id'       => $order->get_id(),
+            'show_downloads' => $order->has_downloadable_item() && $order->is_download_permitted(),
+        ] ); ?>
 
         <div class="arf-thankyou-actions">
             <a href="<?php echo esc_url( arf_shop_url() ); ?>" class="arf-btn-shop">
