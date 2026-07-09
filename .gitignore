@@ -1,0 +1,18 @@
+# Local-dev only — never deploy, never commit
+_local-only/
+local-xdebuginfo.php
+
+# Local machine config (production template wp-config-production.php IS tracked)
+wp-config.php
+
+# Runtime caches & generated files
+wp-content/litespeed/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/upgrade-temp-backup/
+wp-content/uploads/wc-logs/
+*.log
+
+# SQL dumps
+*.sql
+*.sql.gz

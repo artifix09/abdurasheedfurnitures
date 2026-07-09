@@ -1,0 +1,4 @@
+# No PHP execution in uploads — blocks webshell-style attacks
+<FilesMatch "\.(php|php5|php7|phtml|pht)$">
+  Require all denied
+</FilesMatch>

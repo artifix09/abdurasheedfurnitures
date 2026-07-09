@@ -1,0 +1,79 @@
+# ── Force HTTPS + canonical non-www (scoped to production domain — no effect on .local) ──
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# www → non-www
+RewriteCond %{HTTP_HOST} ^www\.abdulrasheedfurnitures\.com$ [NC]
+RewriteRule ^(.*)$ https://abdulrasheedfurnitures.com/$1 [R=301,L]
+# http → https (only for the production domain, so local dev keeps working)
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} ^abdulrasheedfurnitures\.com$ [NC]
+RewriteRule ^(.*)$ https://abdulrasheedfurnitures.com/$1 [R=301,L]
+</IfModule>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Block wp-config.php access (any variant: wp-config.php, .backup, -production.php)
+<FilesMatch "^wp-config">
+  Require all denied
+</FilesMatch>
+
+# Block .htaccess itself and any backups of it
+<FilesMatch "^\.htaccess">
+  Require all denied
+</FilesMatch>
+
+# Block SQL dumps, logs, and internal docs if accidentally uploaded
+<FilesMatch "\.(sql|log|md)$">
+  Require all denied
+</FilesMatch>
+
+# Block readme/license (version disclosure)
+<FilesMatch "^(readme\.html|license\.txt)$">
+  Require all denied
+</FilesMatch>
+
+# Disable directory browsing
+Options -Indexes
+
+# Block XML-RPC
+<Files xmlrpc.php>
+  Require all denied
+</Files>
+
+# Cache static assets (Cloudflare also handles this)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css   "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-font-woff2 "access plus 1 year"
+</IfModule>
+
+# Gzip compression (LiteSpeed handles this — backup)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+</IfModule>

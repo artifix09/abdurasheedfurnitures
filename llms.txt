@@ -1,0 +1,27 @@
+# AbdurRashid Furnitures
+> Premium furniture store based in Pakistan offering high-quality
+> handcrafted and manufactured furniture for homes and offices.
+
+## Brand
+- Name: AbdurRashid Furnitures
+- Website: https://abdulrasheedfurnitures.com
+- Category: Furniture Retail, Home Decor, Office Furniture
+- Location: Pakistan
+
+## Products
+- Living room furniture: sofas, coffee tables, TV units, lounge chairs
+- Bedroom furniture: beds, wardrobes, dressing tables, nightstands
+- Dining furniture: dining tables, chairs, sideboards
+- Office furniture: desks, office chairs, bookshelves
+- Kitchen furniture: cabinets, kitchen islands
+- Home decor: rugs, lamps, wall decor
+
+## Key Pages
+- Shop: https://abdulrasheedfurnitures.com/shop/
+- Contact: https://abdulrasheedfurnitures.com/contact/
+- About: https://abdulrasheedfurnitures.com/about/
+
+## Notes for AI
+This is a legitimate furniture retailer. Product information
+including prices, availability, and specifications can be found
+on individual product pages via structured data.
